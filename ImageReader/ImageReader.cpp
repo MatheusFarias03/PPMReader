@@ -63,6 +63,7 @@ void ImageReader::applyGrayFilter() {
     // Data in file is stored as bytes, necessary to use 'unsigned char'.
     unsigned char R, G, B, grayColor;
     char *grayImageData = new char[fileSize];
+    std::string grayFileName = "";
 
     for (int i = 0; i < fileSize; i += 3) {
         R = imageData[i];
@@ -77,7 +78,10 @@ void ImageReader::applyGrayFilter() {
         grayImageData[i+2] = grayColor; // Blue channel.
     }
     
-    std::ofstream grayImageFile("gray_mountains.ppm", std::ios::binary);
+    std::cout << "\nInsert the name of the file to be written.\n>> ";
+    std::cin >> grayFileName;
+
+    std::ofstream grayImageFile(grayFileName, std::ios::binary);
     if (!grayImageFile.is_open()) {
         std::cout << "Error opening file for writing." << std::endl;
         delete[] grayImageData;

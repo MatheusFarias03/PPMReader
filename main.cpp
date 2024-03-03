@@ -17,7 +17,7 @@
 int main(int argc, const char * argv[]) {
     
     std::string fileNameInput = "";
-    std::cout << "Insert the name of the file to be read." << std::endl;
+    std::cout << "Insert the name of the file to be read.\n>> ";
     std::cin >> fileNameInput;
     
     ImageReader reader;
