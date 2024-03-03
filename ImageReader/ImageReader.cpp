@@ -12,7 +12,7 @@ ImageReader::ImageReader() {
 }
 
 ImageReader::~ImageReader() {
-    // Deallocate memory when object is destroyed
+    // Deallocate memory when object is destroyed.
     if (imageData != nullptr) {
         delete[] imageData;  
     } 
@@ -36,9 +36,9 @@ bool ImageReader::readImage(std::string imagePath) {
 
     // Read the rest of the header.
     std::string dummy;
-    std::getline(inputFile, dummy); // Read the newline after maxColor
+    std::getline(inputFile, dummy); // Read the newline after maxColor.
     
-    // Calculate the size of the pixel data
+    // Calculate the size of the pixel data.
     fileSize = width * height * 3; // 3 bytes per pixel (RGB)
 
     // Store the image's data.
@@ -53,7 +53,7 @@ bool ImageReader::readImage(std::string imagePath) {
 void ImageReader::printImageData() {
     std::cout << format << "\n" << width << "\n" << height << "\n" << maxColor << std::endl;
     for (int i = 0; i < fileSize; i++) {
-        // Convert each byte to an unsigned integer before printing
+        // Convert each byte to an unsigned int before printing.
         std::cout << static_cast<unsigned int>(static_cast<unsigned char>(imageData[i])) << " ";
     }
     std::cout << "\n" << std::endl;
@@ -73,8 +73,8 @@ void ImageReader::applyGrayFilter() {
         grayColor = static_cast<unsigned char>(0.299 * R + 0.587 * G + 0.114 * B);
 
         grayImageData[i] = grayColor; // Red channel.
-        grayImageData[i+1] = grayColor; // Red channel.
-        grayImageData[i+2] = grayColor; // Red channel.
+        grayImageData[i+1] = grayColor; // Green channel.
+        grayImageData[i+2] = grayColor; // Blue channel.
     }
     
     std::ofstream grayImageFile("gray_mountains.ppm", std::ios::binary);
@@ -84,10 +84,10 @@ void ImageReader::applyGrayFilter() {
         return;
     }
 
-    // Write the PPM format header
+    // Write PPM header.
     grayImageFile << format << "\n" << width << " " << height << "\n" << maxColor << "\n";
 
-    // Write the grayscale pixel data
+    // Write the grayscale pixel data.
     grayImageFile.write(reinterpret_cast<char*>(grayImageData), fileSize);
     
     grayImageFile.close();
